@@ -31,18 +31,18 @@ async search() {
 
 // this.form = {status: "1", ...}
 // this.searchData = {status: "2", interviewStatus: "1", isChoooseAllDelivery: false, ...}
-// async search() {
-//   const params = {};
-//   let keys = Object.keys(this.searchData).filter(key => key !== "interviewStatus");
-//   if(this.form.status === "1") {
-//     keys = keys.filter(key => key !== "status");
-//   } else {
-//     keys = keys.filter(key => key !== "isChoooseAllDelivery");
-//   }
-//   for (let key in keys) {
-//     params[key] = this.searchData[key];
-//   }
-// }
+async search() {
+  const params = {};
+  let keys = Object.keys(this.searchData).filter(key => key !== "interviewStatus");
+  if(this.form.status === "1") {
+    keys = keys.filter(key => key !== "status");
+  } else {
+    keys = keys.filter(key => key !== "isChoooseAllDelivery");
+  }
+  for (let key in keys) {
+    params[key] = this.searchData[key];
+  }
+}
 
 async search() {
   let keys = Object.keys(this.searchData).filter(key => key !== "interviewStatus");
@@ -67,3 +67,24 @@ async search() {
     };
   }, {});
 }
+
+
+
+// this.form = {status: "1", ...}
+// this.searchData = {status: "2", interviewStatus: "1", isChoooseAllDelivery: false, ...}
+async search() {
+  const params = {};
+  const {interviewStatus: ignore, status, isChoooseAllDelivery, ...rest} = dataObj;
+  if(this.form.status === "1") {
+    params = {
+      ...rest,
+      isChoooseAllDelivery,
+    };
+  } else {
+    params = {
+      ...rest,
+      status,
+    };
+  }
+}
+
